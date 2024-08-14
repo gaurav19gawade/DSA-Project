@@ -1,4 +1,4 @@
-package Learning.InPlaceLinklistManipulation;
+package Practice;
 
 import Learning.LinkListHelper.LinkedList;
 import Learning.LinkListHelper.LinkedListNode;
