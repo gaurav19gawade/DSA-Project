@@ -26,17 +26,11 @@ public class TopKFrequentWords {
       map.put(word, map.getOrDefault(word,0)+1);
     }
 
-    PriorityQueue<String> frequency = new PriorityQueue<>(new Comparator<String>() {
-      @Override
-      // String1 could potentially be top of the heap
-      public int compare(String string1, String string2){
-        int freq1 = map.get(string1);
-        int freq2 = map.get(string2);
-        System.out.println(string1 + "'s" + " frequency is "+freq1);
-        System.out.println(string2 + "'s" + " frequency is "+freq2);
-        if (freq1 == freq2) return string2.compareTo(string1);
-        return freq1-freq2;
-      }
+    PriorityQueue<String> frequency = new PriorityQueue<>((string1, string2) -> {
+      int freq1 = map.get(string1);
+      int freq2 = map.get(string2);
+      if (freq1 == freq2) return string2.compareTo(string1);
+      return freq1 - freq2;
     });
 
     for(Map.Entry<String, Integer> set: map.entrySet()){

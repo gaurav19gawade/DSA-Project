@@ -6,38 +6,47 @@ import Learning.LinkListHelper.LinkedListNode;
 public class ReverseNodesInKGroups {
 
   public static LinkedListNode reverseInKgroups(LinkedListNode head, int k) {
-    LinkedListNode current = head, next, previous = null;
-    int count = k;
-
-    if (head == null){
-      return null;
+    if (head == null || k == 1) {
+      return head;
     }
 
-    while(current != null && count > 0){
-      next = current.next;
-      current.next = previous;
-      previous = current;
-      current = next;
-      count--;
-    }
+    LinkedListNode dummy = new LinkedListNode(0);
+    dummy.next = head;
+    LinkedListNode previous = dummy;
+    LinkedListNode current = head;
 
-    if (current == null && count > 0){
-      current = previous;
-      previous = null;
-      while(current != null){
-        next = current.next;
-        current.next = previous;
-        previous = current;
-        current = next;
+
+    while(true){
+      int count = 0;
+      LinkedListNode groupStart = previous.next;
+
+      while(current != null && count < k){
+        current = current.next;
+        count++;
+      }
+
+      if(count == k){
+        LinkedListNode reversedHead = reversed(groupStart, k);
+        previous.next = reversedHead;
+        groupStart.next = current; // Connect the end of the reversed group to the next part
+        previous = groupStart; // Move previous to the end of the reversed group
+      } else{
+        break;
       }
     }
+    return dummy.next;
+  }
 
-    if (count > 0){
-      return previous;
-    } else {
-      head.next = reverseInKgroups(current, k);
+  public static LinkedListNode reversed(LinkedListNode head, int k){
+    LinkedListNode previous = null, current = head;
+
+    while(k > 0) {
+      LinkedListNode forward = current.next;
+      current.next = previous;
+      previous = current;
+      current = forward;
+      k--;
     }
-
     return previous;
   }
 
