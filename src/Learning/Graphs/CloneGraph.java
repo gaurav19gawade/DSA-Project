@@ -2,6 +2,21 @@ package Learning.Graphs;
 
 import java.util.HashMap;
 
+
+/*
+To clone a graph
+we maintain a hashmap of current node in question as a key and its value as new node created with
+data from current node.
+
+we recursively create clone graph by passing the root of existing graph. In this function
+we create a new node with current node's data and put it in the map
+we then process the neighbors of this current node
+we check if neigh is present in the map, if not recursively call node clone function.
+and the value returned by node clone function is either null or new node created and
+add it to the neighbors of new node created.
+
+ */
+
 public class CloneGraph {
 
   static HashMap<Node, Node> map = new HashMap<>();

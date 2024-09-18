@@ -6,6 +6,22 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
+/*
+We are given routes of buses in routes array that each bus repeats forever, a source station and target station
+For example - routes = [[1,2,7],[7,8,9]] --> indicates bus 0 has routes 1,2,7, bus 1 has routes 7,8,9 and so on...
+
+we maintain a hashmap of stations and list of buses which stop at these stations.
+For example - {7: [0,1]}
+
+
+we will BFS algo to traverse over the stations staring from the source station and adding it to the queue
+
+for each poped station we over the bus(if not visited) get all the routes (if not visited) of the bus and add these
+routes(station) to the queue. For every route that we add we increase the route length (i.e number of buses)
+
+
+ */
+
 public class BusRoutes {
   public static int numBusesToDestination(int[][] routes, int source, int target) {
 
@@ -52,9 +68,7 @@ public class BusRoutes {
         }
       }
     }
-
     return -1;
-
   }
 
   public static void main(String[] args) {
